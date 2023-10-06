@@ -1,0 +1,29 @@
+body {
+  // background-color: oldlace;
+  background-color: whitesmoke;
+}
+a {
+  text-decoration: none;
+}
+
+.navHeader {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navHeader li {
+  display: inline;
+  margin-right: 10px;
+}
+
+// .navCart {
+//   list-style: none;
+//   padding: 0;
+//   justify-content: center;
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+// }
