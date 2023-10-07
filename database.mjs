@@ -1,10 +1,15 @@
+import dotenv from 'dotenv';
 import postgres from 'postgres';
 
-const sql = postgres(
-  'postgres://next_js_ecommerce_store:next_js_ecommerce_store@localhost:5432/next_js_ecommerce_store',
-);
+dotenv.config();
+
+const sql = postgres();
+
 console.log(
   await sql`
       SELECT * FROM goodies;
   `,
 );
+
+// Database connection needs to be open - example code how to end:
+// await sql.end();
