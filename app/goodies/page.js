@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import getGoodies from '../../database/goodies';
+// import { getAllGoodiesFromDatabase } from '../../database/connect';
+// import getGoodies from '../../database/goodies';
+import { getGoodies } from '../../database/goodies';
 import styles from './page.module.scss';
 
 export const metadata = {
@@ -8,8 +10,12 @@ export const metadata = {
     'Your resident manga merch dealer. All goodies are authentic and from Japan.',
 };
 
-export default function GoodiesPage() {
-  const goodies = getGoodies();
+export default async function GoodiesPage() {
+  const goodies = await getGoodies();
+  console.log('Check: ', goodies);
+  // console.log(
+  //   getAllGoodiesFromDatabase().then((singleGoody) => console.log(singleGoody)),
+  // );
   return (
     <div>
       This is my product page
@@ -26,6 +32,7 @@ export default function GoodiesPage() {
               alt={goody.goodyName}
               width={400}
               height={350}
+              className={styles['zoom-image']}
             />
           </div>
         ))}

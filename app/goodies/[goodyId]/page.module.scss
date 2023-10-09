@@ -1,0 +1,27 @@
+.goodyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContainer {
+  padding: 20px;
+  border: 20px;
+  // overflow: hidden;
+  // transition: transform 0.3s;
+}
+
+// .zoom-image:hover {
+//   transform: scale(1.1);
+// }
+
+.infoContainer {
+  padding: 10px;
+  border: 10px;
+  color: rebeccapurple;
+}
+
+.infoContainer h1 {
+  text-decoration: underline;
+  margin-bottom: -5px; /* Adjust margin for better positioning */
+}

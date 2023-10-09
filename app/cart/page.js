@@ -1,11 +1,162 @@
-export default function CartPage() {
-  return <div> This is my cart page</div>;
+// export default function CartPage() {
+//   return <div> This is my cart page</div>;
+// }
+// export const metadata = {
+//   title: 'Cart |',
+//   description:
+//     'Your resident manga merch dealer. All goodies are authentic and from Japan.',
+// };
+
+import Link from 'next/link';
+import React from 'react';
+import { getGoodies } from '../../database/goodies';
+import { getCookie } from '../../util/cookies';
+import { parseJson } from '../../util/json';
+import EditCartForm from './EditCartForm'; // Import your EditAndRemoveForm component
+
+// all items to add to the cart with quantities
+export async function getAllItemsWithQuantities() {
+  const cookieDataString = await getCookie('cart');
+  // console.log('cookieDataString:', cookieDataString);
+  // console.log('Type of cookieDataString:', typeof cookieDataString);
+  const cookieData = JSON.parse(cookieDataString);
+  // console.log('cookieData:', cookieData);
+  // console.log('Type of cookieData:', typeof cookieData);
+  const databaseGoodies = await getGoodies();
+  // console.log('databaseGoodies:', databaseGoodies);
+  // console.log('Type of databaseGoodies:', typeof databaseGoodies);
+  const filteredCartData = cookieData.map((cookieItem) => {
+    // console.log(
+    //   'ItemId:',
+    //   cookieItem.id,
+    //   'Item quantity:',
+    //   cookieItem.quantity,
+    // );
+    // console.log(
+    //   'Type of ItemId:',
+    //   typeof cookieItem.id,
+    //   'Type of Item quantity:',
+    //   typeof cookieItem.quantity,
+    // );
+    const databaseGoody = databaseGoodies.find(
+      (product) => parseInt(cookieItem.id) === product.id,
+    );
+    console.log('databaseProduct:', databaseGoody);
+    console.log('type of databaseProduct:', typeof databaseGoody);
+    const subtotal = cookieItem.quantity * databaseGoody.price;
+    const databaseProductName = databaseGoody.name;
+    console.log(
+      'type of databaseProductName',
+      typeof databaseProductName,
+      'type of databaseProduct.name',
+      typeof databaseGoody.name,
+    );
+    return {
+      id: databaseGoody.id,
+      name: databaseGoody.goodyName,
+      type: databaseGoody.type,
+      price: databaseGoody.price,
+      quantity: cookieItem.quantity,
+      subtotal: subtotal,
+    };
+  });
+  console.log('Filtered array of objects:', filteredCartData);
+  return filteredCartData;
+
+  // cartItem {
+  //   id: Number,  database
+  //   name: string, database
+  //   type: string, database
+  //   price: Number, database
+  //   quantity: Number, cart
+  //   subtotal: Number, calculated
+  // }
 }
-export const metadata = {
-  title: 'Cart |',
-  description:
-    'Your resident manga merch dealer. All goodies are authentic and from Japan.',
-};
+
+export default async function CartPage() {
+  const cart = await getAllItemsWithQuantities();
+
+  return (
+    <>
+      <h1>Your cart</h1>
+      <ul>
+        {cart.map((item) => {
+          return (
+            <li key={item.id}>
+              <h3>Name{item.name}</h3>
+              <p>Price{item.price}</p>
+              <p>Type{item.type}</p>
+              <p>Quantity{item.quantity}</p>
+              <p>Subtotal{item.subtotal}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </>
+  );
+}
+
+// export default function CartPage() {
+//   const router = useRouter();
+//   const { goodyId, quantity } = router.query;
+
+//   // Create a cart state or use your existing cart state management
+//   // In this example, we'll use local state for simplicity
+//   const [cart, setCart] = useState([]);
+
+//   useEffect(() => {
+//     if (goodyId && quantity) {
+//       // Update the cart with the item specified in the query parameter
+//       setCart([...cart, { goodyId, quantity }]);
+//     }
+//   }, [goodyId, quantity, cart]);
+
+//   // Render the cart items
+//   return (
+//     <div>
+//       <h1>Cart</h1>
+//       {cart.map((item) => (
+//         <div key={`user-${item.id}`}>
+//           <p>Goody ID: {item.goodyId}</p>
+//           <p>Quantity: {item.quantity}</p>
+//           {/* Render additional cart item details here */}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// CartPage.js
+
+// import { useEffect, useState } from 'react';
+
+// export default function CartPage() {
+//   const [cartItems, setCartItems] = useState([]);
+
+//   // Retrieve the cart data from localStorage when the component mounts
+//   useEffect(() => {
+//     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+//     setCartItems(savedCart);
+//   }, []);
+
+//   // Perform cart-related logic here based on cartItems
+//   // For example, calculate the total price or render the cart items
+
+//   return (
+//     <div>
+//       <h1>Cart</h1>
+//       {/* Render cart items and perform cart-related logic */}
+//       {cartItems.map((item) => (
+//         <div key={`user-${item.id}`}>
+//           <p>Goody ID: {item.goodyId}</p>
+//           <p>Quantity: {item.quantity}</p>
+//           {/* Add more cart-related content for each item */}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
 // export default function CartPage() {
 //   // Retrieve the cart data from cookies
 //   const cookieData = document.cookie

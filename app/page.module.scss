@@ -1,0 +1,19 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  // gap: 2px;
+  // background-color: gainsboro;
+}
+
+.goodies-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.goodies-container img {
+  width: 400px;
+  height: 350px;
+  border-radius: 8px;
+}

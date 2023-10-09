@@ -1,7 +1,9 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import postgres from 'postgres';
+import { setEnvironmentVariables } from './util/config.mjs';
 
-dotenv.config();
+setEnvironmentVariables();
+// dotenv.config();
 
 const sql = postgres();
 

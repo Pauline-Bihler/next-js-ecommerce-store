@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 // import { getGoody } from '../../../database/goodies';
 import { addQuantity } from './actions';
@@ -7,6 +9,7 @@ import { addQuantity } from './actions';
 export default function GoodyQuantityForm(props) {
   // ({ goodyId })
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
 
   const handleIncrease = () => {
     setQuantity(quantity + 1);
@@ -19,17 +22,15 @@ export default function GoodyQuantityForm(props) {
   };
   // console.log(`Added ${quantity} to cart`);
 
-  // const handleAddToCart = async () => {
-  //   await addQuantity(quantity);
-  //   // After adding to cart, you can redirect to the cart page
-  //   window.location.href = '/cart'; // Change the URL to your cart page
-  // };
+  const handleAddToCart = async () => {
+    await addQuantity(props.goodyId, quantity);
 
-  // preventDefault is not needed in next.js
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(`Added ${quantity} to cart`);
-  // };
+    // Redirect to the cart page with cart data as a query parameter
+    router.push({
+      pathname: '/cart',
+      query: { goodyId: props.goodyId, quantity },
+    });
+  };
 
   return (
     <form>
@@ -47,61 +48,25 @@ export default function GoodyQuantityForm(props) {
       >
         Add to cart
       </button>
+      {/* <button onClick={handleAddToCart}>Add to cart</button> */}
+      <Link href="/cart">
+        <div>
+          <button>View cart</button>
+        </div>
+      </Link>
     </form>
   );
 }
 
-//   const handleAddToCart = () => {
-//     // Create an object representing the item and its quantity
-//     const item = {
-//       id: goodyId,
-//       quantity: quantity,
-//     };
+// ------------------------------------
+// const handleAddToCart = async () => {
+//   await addQuantity(quantity);
+//   // After adding to cart, you can redirect to the cart page
+//   window.location.href = '/cart'; // Change the URL to your cart page
+// };
 
-//     // Check if a shopping cart already exists in local storage
-//     const existingCart = localStorage.getItem('cart');
-
-//     if (existingCart) {
-//       // If a cart exists, parse it and add the item to it
-//       const cart = JSON.parse(existingCart);
-//       cart.push(item);
-//       localStorage.setItem('cart', JSON.stringify(cart));
-//     } else {
-//       // If no cart exists, create a new one with the item
-//       const cart = [item];
-//       localStorage.setItem('cart', JSON.stringify(cart));
-//     }
-
-//     // Redirect to the cart page
-//     window.location.href = '/cart';
-//   };
-
-//   return (
-//     <form>
-//       <div>
-//         <button type="button" onClick={handleDecrease}>
-//           -
-//         </button>
-//         <span>{quantity}</span>
-//         <button type="button" onClick={handleIncrease}>
-//           +
-//         </button>
-//       </div>
-//       <button onClick={handleAddToCart}>Add to cart</button>
-//     </form>
-//   );
-// }
-
-// Lukas' example
-// export default function GoodyQuantityForm() {
-//   const[comment,setComment] = useState('');
-//   return (
-//     <form>
-//       <textarea
-//       value={comment}
-//       onChange={(event) => setComment(event.currentTarget.value)}
-//       />
-//       <button formAction={async () => await createOrUpdateComment(comment)}>Add to cart</button>
-//     </form>
-//   );
-// }
+// preventDefault is not needed in next.js
+// const handleSubmit = (event) => {
+//   event.preventDefault();
+//   console.log(`Added ${quantity} to cart`);
+// };

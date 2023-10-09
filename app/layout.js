@@ -14,6 +14,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // const goodies = await getGoodies();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -53,39 +54,23 @@ export default function RootLayout({ children }) {
             {/* </nav> */}
           </header>
         </div>
-
-        {/* <section>
-          <div className={styles.heroSection}>
-            <div className={styles.container}>
-              <header>
-                <nav>
-                  <a href="/#" className={styles.hyperComplyLogo}>
-                    <Logo />
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="/#">Product</a>
-                    </li>
-                    <li>
-                      <a href="/#">Pricing</a>
-                    </li>
-                    <li>
-                      <a href="/#">Company</a>
-                    </li>
-                    <li>
-                      <a href="/#">Learn more</a>
-                    </li>
-                  </ul>
-                  <div className={styles.linksContainer}>
-                    <a href="/#" className={styles.signInButton}>
-                      Sign in
-                    </a>
-                    <a href="/#" className={styles.requestDemoButton}>
-                      Request a Demo
-                    </a>
-                  </div>
-                </nav>
-              </header> */}
+        {/* <div className={global['grid-container']}>
+          {goodies.map((goody) => (
+            <div
+              key={`goody-div-${goody.id}`}
+              className={global['goodies-container']}
+            >
+              <Link href={`/goodies/${goody.id}`}>{goody.goodyName}</Link>
+              <br />
+              <img
+                src={`/images/${goody.goodyName}.jpg`}
+                alt={goody.goodyName}
+                width={400}
+                height={350}
+              />
+            </div>
+          ))}
+        </div> */}
         {children}
       </body>
     </html>
