@@ -7,19 +7,20 @@
 //     'Your resident manga merch dealer. All goodies are authentic and from Japan.',
 // };
 
-import Link from 'next/link';
+// import Link from 'next/link';
 import React from 'react';
 import { getGoodies } from '../../database/goodies';
 import { getCookie } from '../../util/cookies';
-import { parseJson } from '../../util/json';
-import EditCartForm from './EditCartForm'; // Import your EditAndRemoveForm component
+
+// import { parseJson } from '../../util/json';
+// import EditCartForm from './EditCartForm';
 
 // all items to add to the cart with quantities
 export async function getAllItemsWithQuantities() {
-  const cookieDataString = await getCookie('cart');
+  const cookieData = await getCookie('cart');
   // console.log('cookieDataString:', cookieDataString);
   // console.log('Type of cookieDataString:', typeof cookieDataString);
-  const cookieData = JSON.parse(cookieDataString);
+  // const cookieData = JSON.parse(cookieDataString.value);
   // console.log('cookieData:', cookieData);
   // console.log('Type of cookieData:', typeof cookieData);
   const databaseGoodies = await getGoodies();
@@ -75,26 +76,54 @@ export async function getAllItemsWithQuantities() {
 
 export default async function CartPage() {
   const cart = await getAllItemsWithQuantities();
+  let total = 0;
+  // try {
+  //   const cart = await getAllItemsWithQuantities();
+
+  //   if (cart.length === 0) {
+  //     // Display a message when the cart is empty
+  //     return (
+  //       <>
+  //         <p>Your cart is empty</p>
+  //       </>
+  //     );
+  //   }
 
   return (
     <>
       <h1>Your cart</h1>
       <ul>
         {cart.map((item) => {
-          return (
-            <li key={item.id}>
-              <h3>Name{item.name}</h3>
-              <p>Price{item.price}</p>
-              <p>Type{item.type}</p>
-              <p>Quantity{item.quantity}</p>
-              <p>Subtotal{item.subtotal}</p>
-            </li>
-          );
+          if (item.quantity > 0) {
+            total += item.subtotal; // Calculate the total price
+            return (
+              <li key={item.id}>
+                <h3>Goody: {item.name}</h3>
+                <p>Price: {item.price}</p>
+                <p>Type: {item.type}</p>
+                <p>Quantity: {item.quantity}</p>
+                <p>Subtotal: {item.subtotal}</p>
+              </li>
+            );
+          } else {
+            return null;
+          }
         })}
       </ul>
+      <p>Total Price: ${total.toFixed(2)}</p>
     </>
   );
 }
+
+// } catch (error) {
+//   // Handle any errors that might occur during cart retrieval
+//   return (
+//     <>
+//       <h1>Error: Unable to retrieve cart</h1>
+//     </>
+//   );
+// }
+// }
 
 // export default function CartPage() {
 //   const router = useRouter();
