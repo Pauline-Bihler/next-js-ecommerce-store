@@ -1,4 +1,5 @@
 import CheckoutForm from './CheckOutForm';
+import SubmitButton from './SubmitButton';
 
 export const metadata = {
   title: 'Checkout |',
@@ -11,6 +12,7 @@ export default function CheckoutPage() {
     <div>
       {/* <h1>Checkout</h1> */}
       <CheckoutForm />
+      <SubmitButton />
     </div>
   );
 }

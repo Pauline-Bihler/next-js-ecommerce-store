@@ -108,7 +108,6 @@ export default function CheckoutForm() {
             <option value="paypal">PayPal</option>
           </select>
         </div>
-        <button>Submit</button>
       </form>
     </div>
   );
