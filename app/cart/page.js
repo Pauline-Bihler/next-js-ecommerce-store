@@ -11,6 +11,8 @@
 import React from 'react';
 import { getGoodies } from '../../database/goodies';
 import { getCookie } from '../../util/cookies';
+import CheckoutButton from './CheckoutButton';
+import RemoveButton from './RemoveButton';
 
 // import { parseJson } from '../../util/json';
 // import EditCartForm from './EditCartForm';
@@ -95,7 +97,7 @@ export default async function CartPage() {
       <ul>
         {cart.map((item) => {
           if (item.quantity > 0) {
-            total += item.subtotal; // Calculate the total price
+            total += item.subtotal; // Calculate the total price - current value of total and add to it the value of item.subtotal, then update total with the result.
             return (
               <li key={item.id}>
                 <h3>Goody: {item.name}</h3>
@@ -103,6 +105,8 @@ export default async function CartPage() {
                 <p>Type: {item.type}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>Subtotal: {item.subtotal}</p>
+                <RemoveButton goodyId={item.id} />{' '}
+                {/* props= {goodyId:item.id}*/}
               </li>
             );
           } else {
@@ -110,7 +114,10 @@ export default async function CartPage() {
           }
         })}
       </ul>
+
       <p>Total Price: ${total.toFixed(2)}</p>
+
+      <CheckoutButton />
     </>
   );
 }

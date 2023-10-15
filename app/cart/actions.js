@@ -2,7 +2,26 @@
 
 import { cookies } from 'next/headers';
 import { getCookie } from '../../util/cookies';
-import { parseJson } from '../../util/json';
+
+export async function removeGoody(goodyId) {
+  console.log('goodyId:', goodyId);
+  // get cookie
+  const jsonCart = await getCookie();
+
+  // filter jsonCart to remove the item with productId
+  const updatedCart = jsonCart.filter((item) => {
+    if (parseInt(item.id) !== parseInt(goodyId)) {
+      return item;
+    }
+    return console.log('item deleted');
+  });
+  // set updated cartCookie
+  cookies().set('cart', JSON.stringify(updatedCart));
+}
+
+// import { cookies } from 'next/headers';
+// import { getCookie } from '../../util/cookies';
+// import { parseJson } from '../../util/json';
 
 // export async function removeSingleItemFromCookies(itemId) {
 //   // get/choose the current cookie
