@@ -2,6 +2,13 @@
 
 import { removeGoody } from './actions';
 
+// type Props = {
+//   props: {
+//     goodyId: number;
+//     itemId: number;
+//   };
+// };
+
 export default function RemoveButton(props) {
   return (
     <div>

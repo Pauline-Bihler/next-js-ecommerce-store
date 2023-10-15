@@ -1,7 +1,7 @@
 import secureJson from 'secure-json-parse';
 
 // add this function of the package to ensure the cookies can not be manipulated
-export function parseJson(stringifiedJson) {
+export function parseJson(stringifiedJson: string) {
   if (!stringifiedJson) return undefined;
   try {
     return secureJson(stringifiedJson);
