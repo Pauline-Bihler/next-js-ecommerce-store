@@ -1,6 +1,7 @@
 import './globals.scss';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import CookieBanner from './cookies/CookieBanner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         {/* <h1>Layout title</h1> */}
         <div className="navContainer">
           <header>
+            <CookieBanner />
             <nav className="navHeader">
               {/* <a href="/#" className={styles.hyperComplyLogo}>
                         <Logo />

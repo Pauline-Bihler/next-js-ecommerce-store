@@ -1,0 +1,38 @@
+.cookieBanner {
+  background-color: rebeccapurple;
+  padding: 5px;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  gap: 2rem;
+  position: fixed;
+  bottom: 0;
+  // width: 100vw;
+  transition: all 0.5s;
+  color: white;
+
+  &.closed {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.button {
+  border: 1px solid;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 4px;
+  margin: 4px;
+
+  &:hover {
+    background-color: #c2aace;
+    color: white;
+  }
+}
