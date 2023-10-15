@@ -1,7 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
 import { sql } from '../database/connect';
+import { Goody } from '../migrations/00000-createTableGoodies';
 
+// Reference Array - do not uncomment
 // const goodies1 = [
 //   { id: 1, goodyName: 'Sasaki and Miyano', type: 'Merch and Manga', price: 20 },
 //   { id: 2, goodyName: 'Therapy Game', type: 'Merch and Manga', price: 15 },
@@ -10,13 +12,13 @@ import { sql } from '../database/connect';
 //   { id: 5, goodyName: 'Little Mushroom', type: 'Novel', price: 10 },
 // ];
 
-type Goody = {
-  id: number;
-  goodyName: string;
-  type: string;
-  price: number;
-  description: string | null;
-};
+// type Goody = {
+//   id: number;
+//   goodyName: string;
+//   type: string;
+//   price: number;
+//   description: string | null;
+// };
 
 export const getGoodies = cache(async () => {
   // return goodies;
@@ -40,6 +42,7 @@ export const getGoodyById = cache(async (id: number) => {
   return goody[0];
 });
 
+// do not uncomment this
 // This function is written better in animals.ts file
 
 // export default function getGoodies() {

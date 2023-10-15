@@ -1,11 +1,50 @@
-// import { readFileSync } from 'node:fs';
-// import dotenv from 'dotenv';
 import 'server-only';
 import { headers } from 'next/headers';
 import postgres, { Sql } from 'postgres';
 import { setEnvironmentVariables } from '../util/config.mjs';
 
 setEnvironmentVariables();
+
+declare module globalThis {
+  let postgresSqlClient: Sql;
+}
+
+// Connect only once to the database -  do not uncomment this
+// https://github.com/vercel/next.js/issues/7811#issuecomment-715259370 - do not uncomment this
+
+function connectOneTimeToDatabase() {
+  if (!('postgresSqlClient' in globalThis)) {
+    globalThis.postgresSqlClient = postgres({
+      transform: {
+        ...postgres.camel,
+        undefined: null,
+      },
+    });
+  }
+
+  return ((
+    ...sqlParameters: Parameters<typeof globalThis.postgresSqlClient>
+  ) => {
+    headers();
+    return globalThis.postgresSqlClient(...sqlParameters);
+  }) as typeof globalThis.postgresSqlClient;
+}
+
+// const sql = connectOneTimeToDatabase(); do not uncomment this
+
+export const sql = connectOneTimeToDatabase();
+
+export async function getAllGoodiesFromDatabase() {
+  const goodies = await sql`
+  SELECT * FROM goodies
+  `;
+  return goodies;
+}
+
+// do not uncomment this
+
+// import { readFileSync } from 'node:fs';
+// import dotenv from 'dotenv';
 
 // export function setEnvironmentVariables() {
 // Replacement for unmaintained dotenv-safe package
@@ -34,37 +73,3 @@ setEnvironmentVariables();
 //     undefined: null,
 //   },
 // });
-
-declare module globalThis {
-  let postgresSqlClient: Sql;
-}
-
-// Connect only once to the database
-// https://github.com/vercel/next.js/issues/7811#issuecomment-715259370
-function connectOneTimeToDatabase() {
-  if (!('postgresSqlClient' in globalThis)) {
-    globalThis.postgresSqlClient = postgres({
-      transform: {
-        ...postgres.camel,
-        undefined: null,
-      },
-    });
-  }
-
-  return ((
-    ...sqlParameters: Parameters<typeof globalThis.postgresSqlClient>
-  ) => {
-    headers();
-    return globalThis.postgresSqlClient(...sqlParameters);
-  }) as typeof globalThis.postgresSqlClient;
-}
-
-// const sql = connectOneTimeToDatabase();
-export const sql = connectOneTimeToDatabase();
-
-export async function getAllGoodiesFromDatabase() {
-  const goodies = await sql`
-  SELECT * FROM goodies
-  `;
-  return goodies;
-}
