@@ -39,7 +39,7 @@ export default async function GoodyPage(props) {
             alt={singleGoody.goodyName}
             width={600}
             height={550}
-            // className={styles['zoom-image']}
+            data-test-id="product-image"
           />
         </div>
         <div className={styles['infoContainer']}>
@@ -47,7 +47,9 @@ export default async function GoodyPage(props) {
           <br />
           {singleGoody.type}
           <br />
-          Price: {singleGoody.price} euros
+          <span data-test-id="product-price">
+            Price: {singleGoody.price} euros{' '}
+          </span>
           <br />
           <br />
           <GoodyQuantityForm goodyId={props.params.goodyId} />

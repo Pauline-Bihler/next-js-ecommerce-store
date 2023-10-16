@@ -39,12 +39,17 @@ export default function GoodyQuantityForm(props) {
           -
         </button>
         <span>{quantity}</span>
-        <button type="button" onClick={handleIncrease}>
+        <button
+          type="button"
+          onClick={handleIncrease}
+          data-test-id="product-quantity"
+        >
           +
         </button>
       </div>
       <button
         formAction={async () => await addQuantity(props.goodyId, quantity)}
+        data-test-id="product-add-to-cart"
       >
         Add to cart
       </button>

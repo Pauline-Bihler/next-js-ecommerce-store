@@ -98,11 +98,17 @@ export default async function CartPage() {
           if (item.quantity > 0) {
             total += item.subtotal; // Calculate the total price - current value of total and add to it the value of item.subtotal, then update total with the result.
             return (
-              <li key={item.id}>
+              <li
+                key={`product-${item.id}`}
+                data-test-id={`product-${item.id}`}
+              >
                 <h3>Goody: {item.name}</h3>
                 <p>Price: {item.price}</p>
                 <p>Type: {item.type}</p>
                 <p>Quantity: {item.quantity}</p>
+                <span data-test-id={`cart-product-quantity-${item.id}`}>
+                  {item.quantity}
+                </span>
                 <p>Subtotal: {item.subtotal}</p>
                 <RemoveButton goodyId={item.id} />{' '}
                 {/* props= {goodyId:item.id}*/}
@@ -114,7 +120,7 @@ export default async function CartPage() {
         })}
       </ul>
 
-      <p>Total Price: ${total.toFixed(2)}</p>
+      <p data-test-id="cart-total">Total Price: ${total.toFixed(2)}</p>
 
       <CheckoutButton />
     </>

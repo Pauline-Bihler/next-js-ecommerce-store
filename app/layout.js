@@ -24,9 +24,6 @@ export default function RootLayout({ children }) {
           <header>
             <CookieBanner />
             <nav className="navHeader">
-              {/* <a href="/#" className={styles.hyperComplyLogo}>
-                        <Logo />
-                      </a> */}
               <ul>
                 <li>
                   <Link href="/">Home</Link>
@@ -35,7 +32,9 @@ export default function RootLayout({ children }) {
                   <Link href="/about">About</Link>
                 </li>
                 <li>
-                  <Link href="/goodies">Goodies</Link>
+                  <Link data-test-id="products-link" href="/goodies">
+                    Goodies
+                  </Link>
                 </li>
                 <li>
                   <Link href="/contact">Contact</Link>

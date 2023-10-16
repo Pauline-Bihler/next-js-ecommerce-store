@@ -12,7 +12,7 @@ export default function CheckoutButton() {
   return (
     // <div className={styles['centeredContainer']}>
     <div>
-      <button type="button" onClick={checkout}>
+      <button type="button" onClick={checkout} data-test-id="cart-checkout">
         Checkout
       </button>
     </div>

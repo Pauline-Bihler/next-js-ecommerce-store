@@ -25,7 +25,12 @@ export default async function GoodiesPage() {
             key={`goody-div-${goody.id}`}
             className={styles['goodies-container']}
           >
-            <Link href={`/goodies/${goody.id}`}>{goody.goodyName}</Link>
+            <Link
+              data-test-id={`product-${goody.id}`}
+              href={`/goodies/${goody.id}`}
+            >
+              {goody.goodyName}
+            </Link>
             <br />
             <img
               src={`/images/${goody.goodyName}.jpg`}
