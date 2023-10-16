@@ -4,7 +4,7 @@ CREATE TABLE goodies (
   goody_name varchar(50) NOT NULL,
   type varchar(50) NOT NULL,
   price decimal (8,2) NOT NULL,
-  description varchar(100)
+  description varchar(200)
 );
 
 // deleting the whole table
