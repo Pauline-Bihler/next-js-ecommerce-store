@@ -23,11 +23,6 @@ export default function CheckoutForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can perform form submission logic here, such as sending the data to a server.
-    // Example: Send formData to a server API
-    // axios.post('/api/checkout', formData).then((response) => {
-    //   // Handle the response from the server
-    // });
     console.log('Form data submitted:', formData);
   };
 

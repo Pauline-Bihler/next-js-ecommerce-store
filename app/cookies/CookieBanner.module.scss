@@ -1,5 +1,5 @@
 .cookieBanner {
-  background-color: rebeccapurple;
+  background-color: #e8e8e8;
   padding: 5px;
   display: flex;
   margin: 0;
@@ -9,7 +9,7 @@
   bottom: 0;
   // width: 100vw;
   transition: all 0.5s;
-  color: white;
+  color: rgb(53, 28, 79);
 
   &.closed {
     opacity: 0;

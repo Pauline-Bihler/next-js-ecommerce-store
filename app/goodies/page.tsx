@@ -18,7 +18,7 @@ export default async function GoodiesPage() {
   // );
   return (
     <div>
-      This is my product page
+      <h1>All goodies are curated with love ♥</h1>
       <div className={styles['grid-container']}>
         {goodies.map((goody) => (
           <div

@@ -1,3 +1,5 @@
+import styles from './about.module.scss';
+
 export const metadata = {
   title: 'About |',
   description:
@@ -5,5 +7,17 @@ export const metadata = {
 };
 
 export default function AboutPage() {
-  return <div> This is my about page</div>;
+  return (
+    <div>
+      <h1> Hi I'm Pauline ♥</h1>
+      <div className={styles['about-me']}>
+        <p>I'm a cat mama from the Philippines.</p>
+        <p> I love reading & collecting japanese mangas and merch. </p>
+        <p>
+          The goodies in my shop are especially curated with love to bring a
+          touch of joy and happiness to your life.{' '}
+        </p>
+      </div>
+    </div>
+  );
 }

@@ -14,6 +14,9 @@ export default async function Home() {
       <LocalStorage />
       <h1>Hello lovely people!</h1>
       <br />
+      <div>
+        <img src="/images/header.jpg" alt="header" width={1425} height={250} />
+      </div>
       <br />
       <h2>Featured Goodies</h2>
       <div className={styles['grid-container']}>
