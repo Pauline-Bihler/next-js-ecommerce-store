@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <main>
       <LocalStorage />
-      <h1>Hello lovely people!</h1>
+      <h1>Hello lovely people ♥</h1>
       <br />
       <div>
         <img src="/images/header.jpg" alt="header" width={1425} height={250} />
