@@ -22,7 +22,7 @@ export default function GoodyQuantityForm(props) {
   };
   // console.log(`Added ${quantity} to cart`);
 
-  const handleAddToCart = async () => {
+  const formAction = async () => {
     await addQuantity(props.goodyId, quantity);
 
     // Redirect to the cart page with cart data as a query parameter

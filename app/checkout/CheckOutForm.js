@@ -31,13 +31,25 @@ export default function CheckoutForm() {
       <h2>Checkout Form</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">First Name:</label>
           <input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
+            data-test-id="checkout-first-name"
+          />
+        </div>
+        <div>
+          <label htmlFor="name">Last Name:</label>
+          <input
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            data-test-id="checkout-last-name"
           />
         </div>
         <div>
@@ -49,6 +61,38 @@ export default function CheckoutForm() {
             value={formData.email}
             onChange={handleChange}
             required
+            data-test-id="checkout-email"
+          />
+        </div>
+        <div>
+          <label htmlFor="address">Address:</label>
+          <input
+            id="address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            data-test-id="checkout-address"
+          />
+        </div>
+        <div>
+          <label htmlFor="address1">City:</label>
+          <input
+            id="city"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+            data-test-id="checkout-city"
+          />
+        </div>
+        <div>
+          <label htmlFor="postal-code">Postal Code:</label>
+          <input
+            id="postal-code"
+            name="postal-codes"
+            value={formData.postalCode}
+            onChange={handleChange}
+            data-test-id="checkout-postal-code"
           />
         </div>
         <div>
@@ -59,25 +103,7 @@ export default function CheckoutForm() {
             value={formData.country}
             onChange={handleChange}
             required
-          />
-        </div>
-        <div>
-          <label htmlFor="address1">Address 1:</label>
-          <input
-            id="address1"
-            name="address1"
-            value={formData.address1}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="address2">Address 2:</label>
-          <input
-            id="address2"
-            name="address2"
-            value={formData.address2}
-            onChange={handleChange}
+            data-test-id="checkout-country"
           />
         </div>
         <div>
@@ -93,16 +119,39 @@ export default function CheckoutForm() {
         </div>
         <div>
           <label htmlFor="paymentMethod">Payment Method:</label>
-          <select
-            id="paymentMethod"
-            name="paymentMethod"
-            value={formData.paymentMethod}
-            onChange={handleChange}
-          >
-            <option value="creditCard">Credit Card</option>
-            <option value="paypal">PayPal</option>
-          </select>
+          <div>
+            <input
+              type="radio"
+              id="creditCard"
+              name="paymentMethod"
+              value="creditCard"
+              // checked={formData.paymentMethod === 'creditCard'}
+              onChange={handleChange}
+              data-test-id="checkout-credit-card"
+            />
+            <label htmlFor="creditCard">Credit Card</label>
+          </div>
         </div>
+        <label>
+          Expiration Date:
+          <input
+            required
+            placeholder="MM/YYYY"
+            data-test-id="checkout-expiration-date"
+          />
+        </label>
+        <br />
+        <br />
+        <label>
+          Security Code:
+          <input
+            required
+            placeholder="123"
+            data-test-id="checkout-security-code"
+          />
+        </label>
+        <br />
+        <br />
       </form>
     </div>
   );

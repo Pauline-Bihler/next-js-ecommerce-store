@@ -1,20 +1,7 @@
-// export default function CartPage() {
-//   return <div> This is my cart page</div>;
-// }
-// export const metadata = {
-//   title: 'Cart |',
-//   description:
-//     'Your resident manga merch dealer. All goodies are authentic and from Japan.',
-// };
-
 import { getGoodies } from '../../database/goodies';
 import { getCookie } from '../../util/cookies';
 import CheckoutButton from './CheckoutButton';
 import RemoveButton from './RemoveButton';
-
-// import React from 'react';
-// import Link from 'next/link';
-// import { parseJson } from '../../util/json';
 
 // all items to add to the cart with quantities
 export async function getAllItemsWithQuantities() {
@@ -78,17 +65,7 @@ export async function getAllItemsWithQuantities() {
 export default async function CartPage() {
   const cart = await getAllItemsWithQuantities();
   let total = 0;
-  // try {
-  //   const cart = await getAllItemsWithQuantities();
-
-  //   if (cart.length === 0) {
-  //     // Display a message when the cart is empty
-  //     return (
-  //       <>
-  //         <p>Your cart is empty</p>
-  //       </>
-  //     );
-  //   }
+  let totalItems = 0;
 
   return (
     <>
@@ -97,6 +74,7 @@ export default async function CartPage() {
         {cart.map((item) => {
           if (item.quantity > 0) {
             total += item.subtotal; // Calculate the total price - current value of total and add to it the value of item.subtotal, then update total with the result.
+            totalItems += item.quantity;
             return (
               <li
                 key={`product-${item.id}`}
@@ -119,13 +97,21 @@ export default async function CartPage() {
           }
         })}
       </ul>
-
       <p data-test-id="cart-total">Total Price: ${total.toFixed(2)}</p>
-
+      <p data-test-id="cart-total-items">Total Items: {totalItems}</p>{' '}
       <CheckoutButton />
     </>
   );
 }
+
+// export default function CartPage() {
+//   return <div> This is my cart page</div>;
+// }
+// export const metadata = {
+//   title: 'Cart |',
+//   description:
+//     'Your resident manga merch dealer. All goodies are authentic and from Japan.',
+// };
 
 // export default function CartPage() {
 //   // Retrieve the cart data from cookies

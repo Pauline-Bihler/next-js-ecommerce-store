@@ -1,6 +1,10 @@
 import './globals.scss';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import { getCookie } from '../util/cookies';
+import getTotalItems from '../util/functions';
+// import { totalItems } from './cart/page';
+// import CartItemCount from './cart/CartItemCount';
 import CookieBanner from './cookies/CookieBanner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -16,6 +20,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   // const goodies = await getGoodies();
+  const cart = getCookie();
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -43,35 +49,17 @@ export default function RootLayout({ children }) {
               </ul>
               <ul>
                 <li>
-                  <Link href="/cart">Cart</Link>
+                  <Link data-test-id="cart-link" href="/cart">
+                    Cart
+                  </Link>
+                </li>
+                <li data-test-id="cart-total-items">
+                  : {getTotalItems(cart)}{' '}
                 </li>
               </ul>
             </nav>
-            {/* <nav className="navCart">
-              <Link href="/cart">Cart</Link> */}
-            {/* <Link href="/#" className={styles.requestDemoButton}>
-                      Request a Demo
-                </Link> */}
-            {/* </nav> */}
           </header>
         </div>
-        {/* <div className={global['grid-container']}>
-          {goodies.map((goody) => (
-            <div
-              key={`goody-div-${goody.id}`}
-              className={global['goodies-container']}
-            >
-              <Link href={`/goodies/${goody.id}`}>{goody.goodyName}</Link>
-              <br />
-              <img
-                src={`/images/${goody.goodyName}.jpg`}
-                alt={goody.goodyName}
-                width={400}
-                height={350}
-              />
-            </div>
-          ))}
-        </div> */}
         {children}
       </body>
     </html>

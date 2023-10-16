@@ -17,7 +17,11 @@ export default function SubmitButton() {
       {/* <button type="button" onClick={submit}>
         Submit
       </button> */}
-      <button type="button" onClick={submit}>
+      <button
+        type="button"
+        onClick={submit}
+        data-test-id="checkout-confirm-order"
+      >
         Submit
       </button>
     </div>

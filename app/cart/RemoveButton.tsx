@@ -2,20 +2,17 @@
 
 import { removeGoody } from './actions';
 
-// type Props = {
-//   props: {
-//     goodyId: number;
-//     itemId: number;
-//   };
-// };
+type Props = {
+  goodyId: number;
+};
 
-export default function RemoveButton(props) {
+export default function RemoveButton({ goodyId }: Props) {
   return (
     <div>
       <form>
         <button
-          formAction={() => removeGoody(props.goodyId)} // props = {goodyId: item.id}
-          data-test-id={`cart-product-remove-${props.itemId}`}
+          formAction={() => removeGoody(goodyId)} // props = {goodyId: item.id}
+          data-test-id={`cart-product-remove-${goodyId}`}
         >
           Delete
         </button>
