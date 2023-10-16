@@ -34,12 +34,12 @@ function connectOneTimeToDatabase() {
 
 export const sql = connectOneTimeToDatabase();
 
-export async function getAllGoodiesFromDatabase() {
-  const goodies = await sql`
-  SELECT * FROM goodies
-  `;
-  return goodies;
-}
+// export async function getAllGoodiesFromDatabase() {
+//   const goodies = await sql`
+//   SELECT * FROM goodies
+//   `;
+//   return goodies;
+// }
 
 // do not uncomment this
 
