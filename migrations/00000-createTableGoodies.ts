@@ -15,7 +15,7 @@ export async function up(sql: Sql) {
       goody_name varchar(50) NOT NULL,
       type varchar(50) NOT NULL,
       price decimal (8,2) NOT NULL,
-      description varchar(100)
+      description varchar(200)
     );
   `;
 }
