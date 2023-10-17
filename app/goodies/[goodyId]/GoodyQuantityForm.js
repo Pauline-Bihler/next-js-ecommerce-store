@@ -22,15 +22,15 @@ export default function GoodyQuantityForm(props) {
   };
   // console.log(`Added ${quantity} to cart`);
 
-  const formAction = async () => {
-    await addQuantity(props.goodyId, quantity);
+  // const formAction = async () => {
+  //   await addQuantity(props.goodyId, quantity);
 
-    // Redirect to the cart page with cart data as a query parameter
-    router.push({
-      pathname: '/cart',
-      query: { goodyId: props.goodyId, quantity },
-    });
-  };
+  // Redirect to the cart page with cart data as a query parameter
+  //   router.push({
+  //     pathname: '/cart',
+  //     query: { goodyId: props.goodyId, quantity },
+  //   });
+  // };
 
   return (
     <form>
@@ -48,7 +48,13 @@ export default function GoodyQuantityForm(props) {
         </button>
       </div>
       <button
-        formAction={async () => await addQuantity(props.goodyId, quantity)}
+        formAction={async () => {
+          await addQuantity(props.goodyId, quantity);
+          router.push({
+            pathname: '/cart',
+            query: { goodyId: props.goodyId, quantity },
+          });
+        }}
         data-test-id="product-add-to-cart"
       >
         Add to cart
