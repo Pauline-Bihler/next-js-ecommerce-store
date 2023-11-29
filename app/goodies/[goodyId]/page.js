@@ -35,7 +35,7 @@ export default async function GoodyPage(props) {
       <div className={styles['goodyContainer']}>
         <div className={styles['imageContainer']}>
           <Image
-            src={`/images/${singleGoody.goodyName}.jpg`}
+            src={`/images/${singleGoody.goodyName.toLowerCase()}.jpg`}
             alt={singleGoody.goodyName}
             width={600}
             height={550}

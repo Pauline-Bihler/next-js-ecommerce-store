@@ -28,7 +28,7 @@ export default async function Home() {
             <Link href={`/goodies/${goody.id}`}>{goody.goodyName}</Link>
             <br />
             <img
-              src={`/images/${goody.goodyName}.jpg`}
+              src={`/images/${goody.goodyName.toLowerCase()}.jpg`}
               alt={goody.goodyName}
               width={400}
               height={350}

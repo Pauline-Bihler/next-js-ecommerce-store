@@ -33,7 +33,7 @@ export default async function GoodiesPage() {
             </Link>
             <br />
             <img
-              src={`/images/${goody.goodyName}.jpg`}
+              src={`/images/${goody.goodyName.toLowerCase()}.jpg`}
               alt={goody.goodyName}
               width={400}
               height={350}
